@@ -8,13 +8,18 @@ const expressLayouts = require('express-ejs-layouts');
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 
+mongoose.connect('mongodb://localhost:27017', { useNewUrlParser: true })
+  .then(() => console.log('connected'))
+  .catch(error => console.log('error', error));
+
+
 const app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
-
 app.use(expressLayouts);
+
 app.set('layout', 'layouts/layout');
 app.set('layout extractScripts', true);
 app.set('layout extractStyles', true);
